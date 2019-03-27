@@ -4,6 +4,8 @@ const fs = require('fs')
 
 var app = express();
 
+const port = process.env.PORT || 8080;
+
 hbs.registerPartials(__dirname + '/views/partials');
 
 app.set('view engine', 'hbs')
@@ -29,23 +31,23 @@ app.use((request, response, next) => {
 	next();
 });
 
-app.use((request, response, next)=>{
-    response.render('template.hbs', {
-        title: 'Maintenance page',
-        message: 'This site is currently down for a maintenance'
-    });
-    // next();
-});
+// app.use((request, response, next)=>{
+//     response.render('template.hbs', {
+//         title: 'Maintenance page',
+//         message: 'This site is currently down for a maintenance'
+//     });
+//     // next();
+// });
 
 app.get('/', (request, response) => {
-	// response.send('<h1>Hello express!</h1>')
-	response.send({
-		name: 'Your Name',
-		school: [
-		'BCIT',
-		'SFU',
-		'UBC']
-	})
+	response.send('<h1>Hello Heroku!</h1>')
+	// response.send({
+	// 	name: 'Your Name',
+	// 	school: [
+	// 	'BCIT',
+	// 	'SFU',
+	// 	'UBC']
+	// })
 });
 
 app.get('/404', (request, response) => {
@@ -63,6 +65,6 @@ app.get('/info', (request, response) => {
 	})
 })
 
-app.listen(8080, () => {
-	console.log('Server is up on the port 8080');
+app.listen(port, () => {
+	console.log(`Server is up on the port ${port}`);
 });
